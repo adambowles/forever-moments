@@ -1,10 +1,10 @@
-# Forever Moments 1.0.0
+# Forever Moments 1.0.1
 
-A standalone World of Warcraft: Forever beta addon that automatically takes screenshots of milestones and small discoveries. Designed to capture generously rather than miss moments. No dependencies, telemetry, or third-party libraries.
+A standalone World of Warcraft: Forever addon that automatically takes screenshots of milestones and small discoveries. Designed to capture generously rather than miss moments. No dependencies, telemetry, or third-party libraries.
 
 ## Install and update with instawow
 
-Configure an instawow profile pointing at Forever's `_classic_beta_/Interface/AddOns` directory. If the Forever beta is not detected automatically, select the directory manually.
+Configure an instawow profile pointing at Forever's `_forever_/Interface/AddOns` directory. If Forever is not detected automatically, select the directory manually.
 
 ```sh
 instawow install github:adambowles/forever-moments
@@ -18,11 +18,11 @@ Once installed, use `instawow update` to receive future GitHub Releases. Alterna
 
 Extract `ForeverMoments/` to:
 
-`World of Warcraft/_classic_beta_/Interface/AddOns/ForeverMoments/`
+`World of Warcraft/_forever_/Interface/AddOns/ForeverMoments/`
 
 That directory must directly contain `ForeverMoments.toc`, `Core.lua`, and `Options.lua`. Restart the client and enable **Forever Moments** in the character-select AddOns menu.
 
-Target: Forever beta interface **16001** (modern client, *not* WotLK 3.3.5a). This is a beta-targeted build and has not been run inside the game client.
+Target: World of Warcraft: Forever interface **16001** (modern client, *not* WotLK 3.3.5a). In-game compatibility has not yet been verified.
 
 ## Commands
 
@@ -50,16 +50,16 @@ Other settings: loot quality threshold, time between screenshot attempts, event 
 
 ## Where screenshots go
 
-Screenshots are stored by the game at `_classic_beta_/Screenshots` under your WoW install directory. The addon cannot choose the filenames or read screenshot files. For high-quality JPGs you can run `/console screenshotQuality 10` or change screenshot format in the game settings.
+Screenshots are stored by the game at `_forever_/Screenshots` under your WoW install directory. The addon cannot choose the filenames or read screenshot files. For high-quality JPGs you can run `/console screenshotQuality 10` or change screenshot format in the game settings.
 
 ## Known limitations
 
-- Forever's beta API uses modern WoW event hooks and protected combat data. Low-health triggers, combat-log triggers and automated rare-enemy kill detection are deliberately not implemented because they cannot reliably examine protected combat information.
-- Collection and certain instance events might not be emitted in all Forever beta builds. Unknown events are skipped safely rather than causing load errors.
+- Forever uses modern WoW event hooks and protected combat data. Low-health triggers, combat-log triggers and automated rare-enemy kill detection are deliberately not implemented because they cannot reliably examine protected combat information.
+- Collection and certain instance events might not be emitted in every Forever client version. Unknown events are skipped safely rather than causing load errors.
 - Item-loot capture uses item messages and quality. It may include loot awarded to other nearby players, and uncached item details are deliberately captured to avoid misses.
 - Many events can happen close together. The addon spaces out screenshots, deduplicates identical triggers for six seconds, and discards very old queued moments. Several different milestones close together can still produce several screenshots.
 - When hiding the UI, the addon restores it after the game's screenshot event or a three-second safety timeout. It will not hide the interface during combat.
-- On a beta client that does not fire SCREENSHOT_SUCCEEDED/FAILED, the timeout prevents lock-ups but successful captures are not counted as successes.
+- If the client does not fire SCREENSHOT_SUCCEEDED/FAILED, the timeout prevents lock-ups but successful captures are not counted as successes.
 - Screenshots are timestamped by the game. The one-second spacing in Capture everything avoids identical time-based filenames.
 
 ## Release automation
@@ -78,6 +78,6 @@ Existing release assets are deliberately not overwritten by a same-version commi
 
 ## Notes for debugging
 
-Enable `Display Lua Errors` in WoW's options if a future beta patch changes interface functions. Check `/fm status` after `/fm snap` to confirm the screenshot success event fires, and verify a new image in your Screenshots folder.
+Enable `Display Lua Errors` in WoW's options if a future game update changes interface functions. Check `/fm status` after `/fm snap` to confirm the screenshot success event fires, and verify a new image in your Screenshots folder.
 
 License: MIT. Unofficial fan addon, not associated with Blizzard Entertainment.

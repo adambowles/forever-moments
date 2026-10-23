@@ -1,8 +1,8 @@
--- Forever Moments 1.0.0: a standalone screenshot journal for WoW: Forever.
+-- Forever Moments 1.0.1: a standalone screenshot journal for WoW: Forever.
 -- No external libraries or protected combat-data processing.
 local ADDON, addon = ...
 
-addon.version = "1.0.0"
+addon.version = "1.0.1"
 addon.defaults = {
     enabled = true,
     delay = 1.1,
@@ -258,7 +258,7 @@ local function OnEvent(self, event, ...)
         addon.charDB.zones = addon.charDB.zones or {}
         addon.charDB.subzones = addon.charDB.subzones or {}
 
-        -- An absent beta-only event must not prevent the addon loading.
+        -- An unavailable client event must not prevent the addon loading.
         for _, name in ipairs({
             "PLAYER_LOGIN", "PLAYER_ENTERING_WORLD", "SCREENSHOT_SUCCEEDED", "SCREENSHOT_FAILED",
             "PLAYER_LEVEL_UP", "ACHIEVEMENT_EARNED", "CRITERIA_EARNED",
@@ -318,7 +318,7 @@ local function OnEvent(self, event, ...)
         addon.Queue("criteria", select(1, ...), "Achievement criterion", 1.2)
     elseif event == "ENCOUNTER_END" then
         local success = select(5, ...)
-        -- The event may contain guarded values in the Forever beta. Avoid
+        -- The event may contain guarded values in Forever. Avoid
         -- inspecting them if the modern combat privacy rules prohibit it.
         local safe, won = pcall(function() return success == 1 or success == true end)
         if safe and won then

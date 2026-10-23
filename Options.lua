@@ -21,7 +21,7 @@ local CATEGORIES = {
     { "recipes", "New recipes", "Profession recipes learned." },
     { "renown", "Renown / PvP rank", "Renown milestones and PvP rank changes." },
     { "reputation", "Reputation messages", "Every reputation gain message (very frequent)." },
-    { "collections", "Pets, mounts, toys", "If the beta client exposes their collection events." },
+    { "collections", "Pets, mounts, toys", "If the client exposes their collection events." },
     { "guildAchievements", "Guild achievements", "Guild achievement chat notifications." },
     { "logins", "Entering the world", "Every login/reload/instance world entry (frequent)." },
     { "scenarios", "Instance completions", "Scenario and challenge-mode events, if supported." },
@@ -222,7 +222,7 @@ function addon.BuildOptions()
         wipe(addon.charDB.subzones)
         addon.Say("Visited zone history cleared for this character.")
     end)
-    Label(frame, "Screenshots folder: _classic_beta_/Screenshots  |  /fm status  |  v" .. addon.version,
+    Label(frame, "Screenshots folder: _forever_/Screenshots  |  /fm status  |  v" .. addon.version,
         11, 25, -642, { 0.7, 0.7, 0.7 })
     addon.RefreshOptions()
 end
