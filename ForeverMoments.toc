@@ -1,0 +1,13 @@
+## Interface: 16001
+## Title: Forever Moments
+## Notes: Automatically captures the little and big moments of your adventure.
+## Author: Community
+## Version: 1.0.0
+## SavedVariables: ForeverMomentsDB
+## SavedVariablesPerCharacter: ForeverMomentsCharDB
+## Category: Miscellaneous
+## IconTexture: Interface\Icons\INV_Misc_Camera_01
+## AddonCompartmentFunc: ForeverMoments_OnCompartmentClick
+
+Core.lua
+Options.lua
