@@ -2,6 +2,18 @@
 
 A standalone World of Warcraft: Forever beta addon that automatically takes screenshots of milestones and small discoveries. Designed to capture generously rather than miss moments. No dependencies, telemetry, or third-party libraries.
 
+## Install and update with instawow
+
+Configure an instawow profile pointing at Forever's `_classic_beta_/Interface/AddOns` directory. If the Forever beta is not detected automatically, select the directory manually.
+
+```sh
+instawow install github:adambowles/forever-moments
+```
+
+Once installed, use `instawow update` to receive future GitHub Releases. Alternatively, enter the repository URL into an add-on manager that supports GitHub Releases.
+
+**Important:** instawow requires a published GitHub Release with an attached installable ZIP. The source-code ZIP generated automatically by GitHub is not an installable release asset. The release workflow builds the required ZIP containing `ForeverMoments/ForeverMoments.toc`, Lua files, README and LICENSE.
+
 ## Install
 
 Extract `ForeverMoments/` to:
@@ -49,6 +61,20 @@ Screenshots are stored by the game at `_classic_beta_/Screenshots` under your Wo
 - When hiding the UI, the addon restores it after the game's screenshot event or a three-second safety timeout. It will not hide the interface during combat.
 - On a beta client that does not fire SCREENSHOT_SUCCEEDED/FAILED, the timeout prevents lock-ups but successful captures are not counted as successes.
 - Screenshots are timestamped by the game. The one-second spacing in Capture everything avoids identical time-based filenames.
+
+## Release automation
+
+The workflow at [`.github/workflows/release.yml`](.github/workflows/release.yml) runs after changes to the add-on on `main`, on version-tag pushes and when started manually from GitHub Actions.
+
+It validates the version in `ForeverMoments.toc` against `addon.version` in `Core.lua`, packages a single top-level `ForeverMoments/` directory into `ForeverMoments-vX.Y.Z.zip`, tests the archive, uploads it as a workflow artifact, and publishes a **GitHub Release with the ZIP attached**.
+
+For a subsequent release:
+
+1. Update `## Version` in `ForeverMoments.toc` and `addon.version` in `Core.lua` to the same new version.
+2. Commit and push to `main`.
+3. The workflow creates the `vX.Y.Z` tag, release and ZIP asset if that version has not already been published.
+
+Existing release assets are deliberately not overwritten by a same-version commit. To distribute an update through instawow, **increase the version**.
 
 ## Notes for debugging
 
